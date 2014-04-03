@@ -226,4 +226,21 @@ abstract class PushServiceProvider
     {
         return false;
     }
+
+    /**
+     * Push a given message to given recipients
+     *
+     * Will prepare and send the payload.
+     *
+     * @param   array   $dest Associative array of 'platorm' => array('tokens')
+     *                        to send the push to
+     * @param   string  $message    Message to send
+     * @param   bool    $toJson=false   Json encoded
+     * @return  string  Prepared payload, JSON format
+     *
+     */
+    protected function push(array $dest, $message, $extra = null, $toJson = false)
+    {
+        return $this->send($this->prepare($dest, $message, $extra, $toJson));
+    }
 }
